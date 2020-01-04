@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: somestrongpassword
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somestrongpassword
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8085:80"
